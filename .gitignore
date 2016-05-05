@@ -1,0 +1,9 @@
+src/main/webapp/WEB-INF/work/
+.settings/
+tmp/
+.mymetadata
+*.bak
+.project
+.gradle/
+/target/
+/xls/

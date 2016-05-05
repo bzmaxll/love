@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="common">
+ 	<typeAlias alias="UpdateMap" type="com.love.entity.UpdateMap"/>
+	
+	<select id="find" parameterClass="UpdateMap" resultClass="String">
+		<!-- Ibatis缓存select字段名引起的问题，具体见：http://www.cnblogs.com/lovingprince/archive/2009/07/02/2166310.html -->
+		select $field$ as field
+		from $table$
+		<iterate prepend="where" property="where" conjunction="and">
+			<isEqual property="where[].operator" compareValue="in">
+				$where[].name$ in ($where[].value$)
+			</isEqual>
+			<isNotEqual property="where[].operator" compareValue="in">
+				$where[].name$ $where[].operator$ #where[].value#
+			</isNotEqual>
+		</iterate>
+		limit 1
+	</select>
+	
+	<update id="update" parameterClass="UpdateMap">
+		update $table$ set
+		<iterate property="fields" conjunction=",">
+			<isGreaterThan property="fields[].num" compareValue="0">
+				$fields[].name$ = $fields[].name$ $fields[].operator$ $fields[].num$
+			</isGreaterThan>
+			<isEqual property="fields[].num" compareValue="0">
+				$fields[].name$ = #fields[].value#
+			</isEqual>
+			<isEqual property="fields[].num" compareValue="-1">
+				$fields[].name$ = concat($fields[].name$, '$fields[].value$')
+			</isEqual>
+		</iterate>
+		<iterate prepend="where" property="where" conjunction="and">
+			<isEqual property="where[].operator" compareValue="in">
+				$where[].name$ in ($where[].value$)
+			</isEqual>
+			<isNotEqual property="where[].operator" compareValue="in">
+				$where[].name$ $where[].operator$ #where[].value#
+			</isNotEqual>
+		</iterate>
+	</update>
+	
+	<delete id="delete" parameterClass="UpdateMap">
+		delete from $table$ 
+		where 
+		<iterate property="where" conjunction="and">
+			<isEqual property="where[].operator" compareValue="in">
+				$where[].name$ in ($where[].value$)
+			</isEqual>
+			<isNotEqual property="where[].operator" compareValue="in">
+				$where[].name$ $where[].operator$ #where[].value#
+			</isNotEqual>
+		</iterate>
+	</delete>
+ 
+</sqlMap>

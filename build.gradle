@@ -1,0 +1,32 @@
+def userGradleScript = file("../lib/build-new.gradle")
+if (userGradleScript.exists()) {
+    apply from: userGradleScript
+}
+
+dependencies {
+	compile "org.apache.struts:struts2-core:$strutsVersion"
+	compile "org.apache.struts:struts2-spring-plugin:$strutsVersion"
+	compile "org.apache.struts:struts2-sitemesh-plugin:$strutsVersion"
+	compile "org.apache.struts:struts2-json-plugin:$strutsVersion"
+	compile "org.apache.struts:struts2-convention-plugin:$strutsVersion"
+	compile "org.springframework:spring-web:$springVersion"
+	compile "org.springframework:spring-orm:$springVersion"
+	compile "org.springframework:spring-context-support:$springVersion"
+	compile "org.springframework:spring-webmvc:$springVersion"
+	compile "org.aspectj:aspectjweaver:$aspectjweaverVersion"
+	compile "cglib:cglib-nodep:$cglibVersion"
+	compile "ibatis:ibatis:$ibatisVersion"
+	
+	compile "com.hisupplier:jxl:$jxlVersion"
+	
+	compile "dom4j:dom4j:$dom4jVersion"		
+	compile "net.sf.json-lib:json-lib:$jsonVersion:jdk15"
+	compile "net.sf.ezmorph:ezmorph:1.0.6"
+}
+
+task copyLib(dependsOn: copyDependencies)
+
+war{
+	appendix = 'love'
+	into "love"
+}

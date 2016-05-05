@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts> 	
+	<package name="love" namespace="/" extends="json-default">
+    	<action name="page_*" class="pageAction" method="{1}">
+			<result name="home">home.jsp</result>
+			<result type="json" name="json"></result>
+        </action>
+        
+        <action name="product_list" class="productAction" method="list">
+			<result type="json" name="json"></result>
+        </action>
+        
+        <action name="product_add" class="productFormAction" method="add">
+			<result type="json" name="json"></result>
+        </action>
+        <action name="product_delete" class="productFormAction" method="delete">
+			<result type="json" name="json"></result>
+        </action>
+        
+        <action name="report_list" class="reportAction" method="list">
+			<result type="json" name="json"></result>
+        </action>
+        
+        <action name="report_detail" class="reportAction" method="detail">
+			<result type="json" name="json"></result>
+        </action>
+        
+        <action name="report_delete" class="reportAction" method="delete">
+			<result type="json" name="json"></result>
+        </action>
+        
+        <action name="report_edit" class="reportFormAction" method="edit">
+			<result type="json" name="json"></result>
+        </action>
+        
+        <action name="report_add" class="reportFormAction" method="add">
+			<result type="json" name="json"></result>
+        </action>
+        
+        <action name="report_remove" class="reportFormAction" method="remove">
+			<result type="json" name="json"></result>
+        </action>
+        
+        <action name="download" class="downloadAction" method="download">
+			<result name="success" type="stream">
+				<param name="contentType">application/x-msexcel</param>
+				<param name="inputName">targetFile</param>
+				<param name="contentDisposition">filename="${fileName}"</param>
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+		
+		<action name="import" class="importAction">
+			<result type="json" name="json"></result>
+        </action>
+    </package>
+</struts>
+

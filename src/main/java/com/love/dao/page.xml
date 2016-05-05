@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="page">
+	<typeAlias alias="Category" type="com.love.entity.Category"/>
+	<typeAlias alias="Product" type="com.love.entity.Product"/>
+	<typeAlias alias="Report" type="com.love.entity.Report"/>
+	
+	<select id="findCategoryList" resultClass="Category">
+		select *
+		from Category
+		where state = 20
+	</select>
+	
+	<select id="findProductList" parameterClass="int" resultClass="Product">
+		select *
+		from Product
+		where state = 20
+		and catId = #value#
+	</select>
+	
+	<select id="findProduct" parameterClass="int" resultClass="Product">
+		select *
+		from Product
+		where state = 20
+		and id = #value#
+	</select>
+	
+	<select id="findProductListByIds" parameterClass="Map" resultClass="Product">
+		select *
+		from Product
+		where id in
+		<iterate property="ids" open="(" close=")" conjunction=",">
+			#ids[]#
+		</iterate>
+	</select>
+	
+	<select id="findReportList" resultClass="Report">
+		select 
+			id,
+			name,
+			createTime
+		from Report
+		where state = 20
+		and rootId = 0
+		and depth = 0
+	</select>
+	 
+	<select id="findReportIdList" parameterClass="int" resultClass="int">
+		select id
+		from Report
+		where state = 0
+		and parentId = #value#
+		and depth = 2
+	</select>
+	
+	
+	<select id="findReport" parameterClass="int" resultClass="Report">
+		select *
+		from Report
+		where state = 20
+		and id = #value#
+	</select>
+	
+	<select id="findReportDetailList" parameterClass="int" resultClass="Report">
+		select 
+			id,
+			name,
+			parentId,
+			depth,
+			pId,
+			num
+		from Report
+		where state = 20
+		and (id = #id# or rootId = #id#)
+	</select>
+	
+	<insert id="addCategory" parameterClass="Category">
+		insert into Category(name,parentId)
+		values (#name#, #parentId#)
+		<selectKey keyProperty="id" resultClass="int">
+			select last_insert_id() as id
+		</selectKey>
+	</insert>
+	
+	<insert id="addProduct" parameterClass="Product">
+		insert into Product(name,brand,model,catId,unit,price1,price2,price3,price4,price5,param,remark)
+		values (#name#,#brand#,#model#,#catId#,#unit#,#price1#,#price2#,#price3#,#price4#,#price5#,#param#,#remark#)
+		<selectKey keyProperty="id" resultClass="int">
+			select last_insert_id() as id
+		</selectKey>
+	</insert>
+	
+	<insert id="addReport" parameterClass="Report">
+		insert into Report(name,rootId,parentId,depth,pId,num)
+		values (#name#,#rootId#,#parentId#,#depth#,#pId#,#num#)
+		<selectKey keyProperty="id" resultClass="int">
+			select last_insert_id() as id
+		</selectKey>
+	</insert>
+</sqlMap>
