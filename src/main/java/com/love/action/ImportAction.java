@@ -29,12 +29,12 @@ public class ImportAction extends BaseAction {
 	@Override
 	public String execute() throws Exception {
 		if (attachment == null) {
-			tip = "Ã»ÓĞÎÄ¼ş£¡";
+			tip = "æ²¡æœ‰æ–‡ä»¶ï¼";
 			return JSON;
 		}
 		
 		if(!attachmentContentType.equalsIgnoreCase("application/vnd.ms-excel") && !attachmentContentType.equalsIgnoreCase("application/x-msexcel")){
-			tip = "²»ÊÇxlsÎÄ¼ş£¡";
+			tip = "ä¸æ˜¯xlsæ–‡ä»¶ï¼";
 			return JSON;
 		}
 

@@ -12,7 +12,7 @@ public class Footer {
 	private float price;
 	
 	public String getName() {
-		return "设备合计";
+		return "璁惧鍚堣";
 	}
 
 	public String getIconCls() {

@@ -53,7 +53,7 @@ public class Report {
 	}
 	
 	public String getLink() {
-		return depth == 0 ? "<a href='javascript:void(0)' onclick='editReport(" + id + ")'>ÐÞ¸Ä</a>" : "";
+		return depth == 0 ? "<a href='javascript:void(0)' onclick='editReport(" + id + ")'>ä¿®æ”¹</a>" : "";
 	}
 	
 	public int getId() {

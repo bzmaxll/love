@@ -16,7 +16,7 @@ public class UpdateMap implements java.io.Serializable {
 
 	private static final long serialVersionUID = -8814793885023276598L;
 	private String table;
-	private String field; // µ¥¸öËÑË÷Ê±Ê¹ÓÃ
+	private String field; // å•ä¸ªæœç´¢æ—¶ä½¿ç”¨
 	private List<Field> fields = new ArrayList<Field>();
 	private List<Field> where = new ArrayList<Field>();
 

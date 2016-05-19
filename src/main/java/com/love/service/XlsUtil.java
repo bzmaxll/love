@@ -27,15 +27,15 @@ import jxl.write.WriteException;
  */
 public class XlsUtil {
 
-	public static final int MAX_COLUMN = 9; 				// ÆÕÍ¨SheetµÄ×î´óÁĞ
-	public static final int MAX_COLUMN_TOTAL = 6; 			// Í³¼ÆSheetµÄ×î´óÁĞ
+	public static final int MAX_COLUMN = 9; 				// æ™®é€šSheetçš„æœ€å¤§åˆ—
+	public static final int MAX_COLUMN_TOTAL = 6; 			// ç»Ÿè®¡Sheetçš„æœ€å¤§åˆ—
 	
 	/**
-	 * ³õÊ¼»¯¹Ì¶¨Í·
-	 * PS: ¿½±´Í·Ê±£¬ºÏ²¢µ¥Ôª¸ñµÄ±ß¿òÃ»ÓĞ¿½±´ÍêÈ«
+	 * åˆå§‹åŒ–å›ºå®šå¤´
+	 * PS: æ‹·è´å¤´æ—¶ï¼Œåˆå¹¶å•å…ƒæ ¼çš„è¾¹æ¡†æ²¡æœ‰æ‹·è´å®Œå…¨
 	 * @param sheet
-	 * @param total ÊÇ·ñÎªÍ³¼ÆSheet
-	 * @param sheetName Ä¬ÈÏÖµ
+	 * @param total æ˜¯å¦ä¸ºç»Ÿè®¡Sheet
+	 * @param sheetName é»˜è®¤å€¼
 	 * @throws WriteException 
 	 */
 	public static void initHeader(WritableSheet sheet, boolean total, String sheetName) throws WriteException{
@@ -49,7 +49,7 @@ public class XlsUtil {
 	}
 	
 	/**
-	 * Ìí¼ÓĞ¡±êÌâµ¥Ôª¸ñ
+	 * æ·»åŠ å°æ ‡é¢˜å•å…ƒæ ¼
 	 * @param sheet
 	 * @param column
 	 * @param row
@@ -57,7 +57,7 @@ public class XlsUtil {
 	 * @throws WriteException
 	 */
 	public static void addPartCell(WritableSheet sheet, int column, int row, String contents) throws WriteException{
-		WritableFont bold = new WritableFont(WritableFont.createFont("ËÎÌå"), 10, WritableFont.BOLD); 
+		WritableFont bold = new WritableFont(WritableFont.createFont("å®‹ä½“"), 10, WritableFont.BOLD); 
 		
 		WritableCellFormat cf = new WritableCellFormat(bold);
 		cf.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.BLACK);
@@ -69,11 +69,11 @@ public class XlsUtil {
 	}
 	
 	/**
-	 * ±ß¿ò¸ñÊ½
+	 * è¾¹æ¡†æ ¼å¼
 	 * @throws WriteException
 	 */
 	public static CellFormat getCellFormat() throws WriteException{
-		WritableFont font = new WritableFont(WritableFont.createFont("ËÎÌå"), 10);
+		WritableFont font = new WritableFont(WritableFont.createFont("å®‹ä½“"), 10);
 		
 		WritableCellFormat cf = new WritableCellFormat(font);
 		cf.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.BLACK);
@@ -82,11 +82,11 @@ public class XlsUtil {
 	}
 	
 	/**
-	 * ²ÎÊı¸ñÊ½: ±ß¿ò + ´¹Ö±¾ÓÖĞ + ×Ô¶¯»»ĞĞ
+	 * å‚æ•°æ ¼å¼: è¾¹æ¡† + å‚ç›´å±…ä¸­ + è‡ªåŠ¨æ¢è¡Œ
  	 * @throws WriteException
 	 */
 	public static CellFormat getParamCellFormat() throws WriteException{
-		WritableFont font = new WritableFont(WritableFont.createFont("ËÎÌå"), 10);
+		WritableFont font = new WritableFont(WritableFont.createFont("å®‹ä½“"), 10);
 		
 		WritableCellFormat cf = new WritableCellFormat(font);
 		cf.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.BLACK);
@@ -96,11 +96,11 @@ public class XlsUtil {
 	}
 	
 	/**
-	 * ±ß¿ò + ¾ÓÖĞ¸ñÊ½
+	 * è¾¹æ¡† + å±…ä¸­æ ¼å¼
 	 * @throws WriteException
 	 */
 	public static CellFormat getCenterCellFormat() throws WriteException{
-		WritableFont font = new WritableFont(WritableFont.createFont("ËÎÌå"), 10);
+		WritableFont font = new WritableFont(WritableFont.createFont("å®‹ä½“"), 10);
 		
 		WritableCellFormat cf = new WritableCellFormat(font);
 		cf.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.BLACK);
@@ -110,11 +110,11 @@ public class XlsUtil {
 	}
 	
 	/**
-	 * ±ß¿ò + ¾ÓÖĞ + ¼Ó´Ö¸ñÊ½
+	 * è¾¹æ¡† + å±…ä¸­ + åŠ ç²—æ ¼å¼
 	 * @throws WriteException
 	 */
 	public static CellFormat getCenterBoldCellFormat() throws WriteException{
-		WritableFont bold = new WritableFont(WritableFont.createFont("ËÎÌå"), 10, WritableFont.BOLD);  
+		WritableFont bold = new WritableFont(WritableFont.createFont("å®‹ä½“"), 10, WritableFont.BOLD);  
 		
 		WritableCellFormat cf = new WritableCellFormat(bold);
 		cf.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.BLACK);
@@ -124,11 +124,11 @@ public class XlsUtil {
 	}
 	
 	/**
-	 * ±ß¿ò + ¾ÓÓÒ + ¼Ó´Ö¸ñÊ½
+	 * è¾¹æ¡† + å±…å³ + åŠ ç²—æ ¼å¼
 	 * @throws WriteException
 	 */
 	public static CellFormat getRightBoldCellFormat() throws WriteException{
-		WritableFont bold = new WritableFont(WritableFont.createFont("ËÎÌå"), 10, WritableFont.BOLD);  
+		WritableFont bold = new WritableFont(WritableFont.createFont("å®‹ä½“"), 10, WritableFont.BOLD);  
 		
 		WritableCellFormat cf = new WritableCellFormat(bold);
 		cf.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.BLACK);
@@ -138,7 +138,7 @@ public class XlsUtil {
 	}
 	
 	/**
-	 * »á¼Æ×¨ÓÃ + ¾ÓÖĞ + ±ß¿ò
+	 * ä¼šè®¡ä¸“ç”¨ + å±…ä¸­ + è¾¹æ¡†
 	 * @param sheet
 	 * @param column
 	 * @param row
@@ -146,7 +146,7 @@ public class XlsUtil {
 	 * @throws WriteException
 	 */
 	public static CellFormat getPriceCellFormat() throws WriteException{
-		WritableFont font = new WritableFont(WritableFont.createFont("ËÎÌå"), 10);
+		WritableFont font = new WritableFont(WritableFont.createFont("å®‹ä½“"), 10);
 
 		WritableCellFormat cf = new WritableCellFormat(font, NumberFormats.ACCOUNTING_FLOAT);
 		cf.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.BLACK);
@@ -157,7 +157,7 @@ public class XlsUtil {
 	}
 	
 	/**
-	 * »á¼Æ×¨ÓÃ + ¾ÓÓÒ + ±ß¿ò + ¼Ó´Ö
+	 * ä¼šè®¡ä¸“ç”¨ + å±…å³ + è¾¹æ¡† + åŠ ç²—
 	 * @param sheet
 	 * @param column
 	 * @param row
@@ -165,7 +165,7 @@ public class XlsUtil {
 	 * @throws WriteException
 	 */
 	public static CellFormat getPriceBoldCellFormat() throws WriteException{
-		WritableFont bold = new WritableFont(WritableFont.createFont("ËÎÌå"), 10, WritableFont.BOLD); 
+		WritableFont bold = new WritableFont(WritableFont.createFont("å®‹ä½“"), 10, WritableFont.BOLD); 
 
 		WritableCellFormat cf = new WritableCellFormat(bold, NumberFormats.ACCOUNTING_FLOAT);
 		cf.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.BLACK);
@@ -175,7 +175,7 @@ public class XlsUtil {
 	}
 	
 	/**
-	 * »á¼Æ×¨ÓÃ + ¾ÓÓÒ + ±ß¿ò
+	 * ä¼šè®¡ä¸“ç”¨ + å±…å³ + è¾¹æ¡†
 	 * @param sheet
 	 * @param column
 	 * @param row
@@ -183,7 +183,7 @@ public class XlsUtil {
 	 * @throws WriteException
 	 */
 	public static CellFormat getPriceRightCellFormat() throws WriteException{
-		WritableFont font = new WritableFont(WritableFont.createFont("ËÎÌå"), 10);
+		WritableFont font = new WritableFont(WritableFont.createFont("å®‹ä½“"), 10);
 
 		WritableCellFormat cf = new WritableCellFormat(font, NumberFormats.ACCOUNTING_FLOAT);
 		cf.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.BLACK);
@@ -193,10 +193,10 @@ public class XlsUtil {
 	}
 	
 	/**
-	 * µÃµ½ºÏ²¢µ¥ÔªµÄÖµ
-	 * 1) ÊÇ·ñÎªºÏ²¢µ¥Ôª¸ñ
-	 * 2) µÃµ½¶¥²¿µ¥Ôª¸ñµÄÖµ
-	 * 3) ²»ÔÚÍ¬Ò»ĞĞ
+	 * å¾—åˆ°åˆå¹¶å•å…ƒçš„å€¼
+	 * 1) æ˜¯å¦ä¸ºåˆå¹¶å•å…ƒæ ¼
+	 * 2) å¾—åˆ°é¡¶éƒ¨å•å…ƒæ ¼çš„å€¼
+	 * 3) ä¸åœ¨åŒä¸€è¡Œ
 	 * @param sheet
 	 * @param c
 	 * @param r
@@ -221,7 +221,7 @@ public class XlsUtil {
 	}
 	
 	/**
-	 * Ö¸¶¨µ¥Ôª¸ñÔö¼Ó±ß¿ò
+	 * æŒ‡å®šå•å…ƒæ ¼å¢åŠ è¾¹æ¡†
 	 * @param sheet
 	 * @param column
 	 * @param row
@@ -232,11 +232,11 @@ public class XlsUtil {
 	}
 	
 	/**
-	 * Ö¸¶¨µ¥Ôª¸ñÔö¼Ó±ß¿ò
+	 * æŒ‡å®šå•å…ƒæ ¼å¢åŠ è¾¹æ¡†
 	 * @param sheet
 	 * @param column
 	 * @param row
-	 * @param sheetName Ä¬ÈÏÖµ
+	 * @param sheetName é»˜è®¤å€¼
 	 * @throws WriteException
 	 */
 	private static void addBorder(WritableSheet sheet, int column, int row, String sheetName) throws WriteException{
@@ -245,7 +245,7 @@ public class XlsUtil {
 		if(cell.getCellFormat() != null){
 			cf = new WritableCellFormat(cell.getCellFormat());
 		}else{
-			WritableFont bold = new WritableFont(WritableFont.createFont("ËÎÌå"), 10, WritableFont.BOLD); 
+			WritableFont bold = new WritableFont(WritableFont.createFont("å®‹ä½“"), 10, WritableFont.BOLD); 
 			
 			cf = new WritableCellFormat(bold);
 			cf.setAlignment(Alignment.CENTRE);

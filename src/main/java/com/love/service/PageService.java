@@ -51,7 +51,7 @@ public class PageService {
 	public Map<String, Object> getHome() {
 		Map<String, Object> result = new HashMap<String, Object>();
 		List<Category> catList = new ArrayList<Category>();
-		Category rootCategory = new Category(0, "¸ù·ÖÀà");
+		Category rootCategory = new Category(0, "æ ¹åˆ†ç±»");
 		catList.add(rootCategory);
 		
 		List<Category> _catList = pageDAO.findCategoryList();
@@ -78,7 +78,7 @@ public class PageService {
 		}
 
 		JsonConfig jsonConfig = new JsonConfig(); 
-		// Èç¹ûÄ¿Â¼µÄchildrenÎªnull£¬²»ĞòÁĞ»¯
+		// å¦‚æœç›®å½•çš„childrenä¸ºnullï¼Œä¸åºåˆ—åŒ–
 	    jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
 	        public boolean apply(Object source, String name, Object value) {
 	            if (value == null && "children".equals(name)) {
@@ -257,11 +257,11 @@ public class PageService {
 	}
 	
 	private int initReport(){
-		int id = addReportRoot("Ä¬ÈÏÇåµ¥");
+		int id = addReportRoot("é»˜è®¤æ¸…å•");
 		
 		int sheetId = addReportSheet(id, "Sheet1");
 		
-		addReportPart(id, sheetId, "µÚÒ»²¿·Ö");
+		addReportPart(id, sheetId, "ç¬¬ä¸€éƒ¨åˆ†");
 
 		return id;
 	}
@@ -315,7 +315,7 @@ public class PageService {
 		}else if(report.getDepth() == 1){
 			Report parentReport = pageDAO.findReport(report.getId());
 			
-			report.setName("Ä¬ÈÏ²¿·Ö");
+			report.setName("é»˜è®¤éƒ¨åˆ†");
 			report.setRootId(parentReport.getRootId());
 			report.setParentId(report.getId());
 			report.setDepth(2);
@@ -407,18 +407,18 @@ public class PageService {
 
 			int sheet_index = 2;
 			if(root.getChildren() != null){
-				Map<String, String> sheetTotal = new HashMap<String, String>(); // ËùÓĞ×Ü¼Æµ¥Ôª¸ñ
+				Map<String, String> sheetTotal = new HashMap<String, String>(); // æ‰€æœ‰æ€»è®¡å•å…ƒæ ¼
 				for (Report sheetReport : root.getChildren()) {
 					book.copySheet(1, sheetReport.getName(), sheet_index);
 					WritableSheet sheet = book.getSheet(sheet_index);
 					XlsUtil.initHeader(sheet, false, sheetReport.getName());
 					
 					if(sheetReport.getChildren() != null){
-						StringBuilder totalCells = new StringBuilder();	// ËùÓĞĞ¡¼Æµ¥Ôª¸ñ
+						StringBuilder totalCells = new StringBuilder();	// æ‰€æœ‰å°è®¡å•å…ƒæ ¼
 						int beginRow = 4;
 
 						for (Report partReport : sheetReport.getChildren()) {
-							// Ãû³ÆÎª¿Õ£¬²»ÏÔÊ¾part²¿·Ö
+							// åç§°ä¸ºç©ºï¼Œä¸æ˜¾ç¤ºpartéƒ¨åˆ†
 							if(StringUtil.isNotBlank(partReport.getName())){
 								sheet.mergeCells(0, beginRow, XlsUtil.MAX_COLUMN - 1, beginRow);
 								XlsUtil.addPartCell(sheet, 0, beginRow, partReport.getName());
@@ -468,7 +468,7 @@ public class PageService {
 								sheet.addCell(lbl);
 								
 								sheet.mergeCells(1, beginRow, XlsUtil.MAX_COLUMN - 3, beginRow);
-								lbl = new Label(1, beginRow, "Ğ¡¼Æ", XlsUtil.getCenterCellFormat());
+								lbl = new Label(1, beginRow, "å°è®¡", XlsUtil.getCenterCellFormat());
 								sheet.addCell(lbl);
 								
 								Formula f1 = new Formula(7, beginRow, "SUM(H" + minRow + ":H" + (maxRow - 1) + ")", XlsUtil.getPriceCellFormat());
@@ -485,7 +485,7 @@ public class PageService {
 						
 						sheet.mergeCells(0, beginRow, XlsUtil.MAX_COLUMN - 3, beginRow);
 						
-						Label lbl = new Label(0, beginRow, "ºÏ¼Æ", XlsUtil.getCenterCellFormat());
+						Label lbl = new Label(0, beginRow, "åˆè®¡", XlsUtil.getCenterCellFormat());
 						sheet.addCell(lbl);
 						
 						if(totalCells.length() > 0){
@@ -504,9 +504,9 @@ public class PageService {
 					sheet_index++;
 				}
 				
-				// ×Ü¼ÛSheet
+				// æ€»ä»·Sheet
 				if(root.getChildren().size() > 1){
-					book.copySheet(0, "×Ü¼Û", 2);
+					book.copySheet(0, "æ€»ä»·", 2);
 					WritableSheet sheet = book.getSheet(2);
 					XlsUtil.initHeader(sheet, true, null);
 					
@@ -539,7 +539,7 @@ public class PageService {
 					
 					sheet.mergeCells(0, beginRow, 4, beginRow);
 					
-					Label lbl = new Label(0, beginRow, "×Ü¼Æ", XlsUtil.getRightBoldCellFormat());
+					Label lbl = new Label(0, beginRow, "æ€»è®¡", XlsUtil.getRightBoldCellFormat());
 					sheet.addCell(lbl);
 					
 					Formula f1 = new Formula(5, beginRow, "SUM(F" + minRow + ":F" + (maxRow - 1)+ ")", XlsUtil.getPriceBoldCellFormat());
@@ -547,7 +547,7 @@ public class PageService {
 				}
 			}
 			
-			// ÒÆ³ı2¸öÄ£°å
+			// ç§»é™¤2ä¸ªæ¨¡æ¿
 			book.removeSheet(0);
 			book.removeSheet(0);	
 		} catch (Exception e) {
@@ -573,11 +573,11 @@ public class PageService {
 			Workbook workbook = Workbook.getWorkbook(attachment);
 			
 			for(Sheet sheet : workbook.getSheets()){
-				if(sheet.getName().equals("×Ü¼Û")){
+				if(sheet.getName().equals("æ€»ä»·")){
 					continue;
 				}
-				// Ã»ÓĞĞòºÅÕâÒ»µ¥Ôª¸ñ£¬ÎªÎŞĞ§sheet
-				Cell cell = sheet.findCell("ĞòºÅ");
+				// æ²¡æœ‰åºå·è¿™ä¸€å•å…ƒæ ¼ï¼Œä¸ºæ— æ•ˆsheet
+				Cell cell = sheet.findCell("åºå·");
 				if(cell == null){
 					continue;
 				}
@@ -597,7 +597,7 @@ public class PageService {
 						continue;
 					}
 					
-					// part²¿·Ö
+					// partéƒ¨åˆ†
 					Colour colour = cell.getCellFormat().getBackgroundColour();
 					if(colour != Colour.DEFAULT_BACKGROUND){
 						partId = addReportPart(rootId, sheetId, cell.getContents());
@@ -623,7 +623,7 @@ public class PageService {
 						param = XlsUtil.getMergedCell(sheet, 8, beginRow).getContents();
 					}
 
-					// ²»ÊÇÉè±¸ÇøÓò
+					// ä¸æ˜¯è®¾å¤‡åŒºåŸŸ
 					if(StringUtil.isBlank(name) || StringUtil.isBlank(model) || StringUtil.isBlank(brand)){
 						continue;
 					}
@@ -642,7 +642,7 @@ public class PageService {
 						pId = pageDAO.addProduct(product);
 					}
 
-					// Ã»ÓĞpart²¿·Ö, ²åÈëÒ»Ìõ¿Õ¼ÇÂ¼
+					// æ²¡æœ‰partéƒ¨åˆ†, æ’å…¥ä¸€æ¡ç©ºè®°å½•
 					if(partId <= 0){
 						partId = addReportPart(rootId, sheetId, "");
 					}
@@ -657,7 +657,7 @@ public class PageService {
 					reportList.add(report);
 				}
 				
-				// ÅúÁ¿²åÈë
+				// æ‰¹é‡æ’å…¥
 				if(reportList.size() > 0){
 					pageDAO.addReport(reportList);
 				}
@@ -665,14 +665,14 @@ public class PageService {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "µ¼ÈëÊ§°Ü";
+			return "å¯¼å…¥å¤±è´¥";
 		} 
 
 		return "success";
 	}
 	
 	/**
-	 * Ìí¼Ó¸ù±¨¸æ
+	 * æ·»åŠ æ ¹æŠ¥å‘Š
 	 * @param name
 	 * @return
 	 */
@@ -684,7 +684,7 @@ public class PageService {
 	}
 	
 	/**
-	 * Ìí¼ÓSheet±¨¸æ
+	 * æ·»åŠ SheetæŠ¥å‘Š
 	 * @param rootId
 	 * @param name
 	 * @return
@@ -699,7 +699,7 @@ public class PageService {
 	}
 	
 	/**
-	 * Ìí¼ÓPart±¨¸æ
+	 * æ·»åŠ PartæŠ¥å‘Š
 	 * @param rootId
 	 * @param name
 	 * @return
